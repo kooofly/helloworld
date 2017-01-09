@@ -1,0 +1,6 @@
+# 如果 .eslintrc 开启了 env nodejs 默认node_modules是自动忽略的
+*.log
+.idea
+.DS_Store
+coverage
+node_modules
