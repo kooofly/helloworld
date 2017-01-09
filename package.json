@@ -1,0 +1,15 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": "前端编码规范 + git提交规范 + 单元测试 + 覆盖率 + 持续集成",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kooofly/helloworld.git"
+  },
+  "author": "kooofly",
+  "license": "MIT"
+}
