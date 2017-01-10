@@ -1,10 +1,10 @@
 # TODO List
-
-- eslint 结合 webpack
+- rollup 更好的打包
+- eslint 结合 rollup
 - eslint 常用规则整理
 - CircleCI + github
 - git 提交规范流程说明
-
+- nightwatch 端到端自动化测试
 ---
 
 # Hello World
