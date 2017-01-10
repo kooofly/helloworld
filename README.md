@@ -1,10 +1,21 @@
 # TODO List
-- rollup 更好的打包
-- eslint 结合 rollup
+
+- css构建
+- 代码压缩
+- LiveReload
+- 忽略第三方代码覆盖率测试配置
 - eslint 常用规则整理
 - CircleCI + github
 - git 提交规范流程说明
 - nightwatch 端到端自动化测试
+- 更好的配置方式
+
+有机结合
+1. rollup 结合 eslint
+1. rollup 结合 karma 单元测试
+1. rollup 结合 karma 代码覆盖率测试
+1. rollup 结合 nightwatch 端到端自动化测试
+
 ---
 
 # Hello World
@@ -38,10 +49,53 @@
 
 按照指示一步步完成
 
+### rollup 更好的构建工具
+
+> npm i -g rollup
+
+在项目根目录新建一个 rollup.config.js
+
+```javascript
+export default {
+  entry: 'src/index.js',
+  format: 'cjs', //cjs = commnjs，其他格式 amd | es6 | iife | umd
+  dest: 'dist/bundle.js',
+  sourceMap: true
+}
+```
+默认构建命令
+
+> rollup -c
+
+默认配置文件 rollup.config.js，可以通过
+
+> rollup -c rollup.config.dev.js
+
+来指定配置文件
+
+#### 使用插件
+
+> npm i rollup-plugin-babel babel-preset-es2015-rollup --save-dev
+
+babel 的配置不像 webpack 可以直接写在配置文件里，而是得新建 .babelrc（注：我们可以写在 src 下，而不是非得放在项目根目录下）
+
+新建 .babelrc
+```json
+{
+  "presets": ["es2015-rollup"]
+}
+```
+
+
+
+rollup插件列表：https://github.com/rollup
+
+rollup官方网址：http://rollupjs.org
+
 ### 编码规范
 
-> npm install eslint -g
-
+> npm i eslint -g
+>
 > eslint --init
 
 按照指示一步步完成（git下的箭头选择有问题，可使用cmd），然后会自动安装依赖npm包 生成.eslintrc.js文件
@@ -134,7 +188,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS'],  //browsers 测试浏览器，有IE，Chrome，ChromeCanary，FireFox，Opera，Safari，PhantomJS
     singleRun: false,
     concurrency: Infinity
   })
