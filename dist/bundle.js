@@ -1,22 +1,2 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var addArray = function addArray(arr) {
-    var result = arr.reduce(function (a, b) {
-        return a + b;
-    }, 0);
-
-    return result;
-};
-function isNum(num) {
-    if (typeof num === 'number') {
-        return true;
-    } else {
-        return false;
-    }
-}
-var result2 = addArray([1, 2, 3, 4]);
-
-exports.isNum = isNum;
+"use strict";function __$styleInject(e,t){if("undefined"==typeof document)return t;e=e||"";var n=document.head||document.getElementsByTagName("head")[0],r=document.createElement("style");return r.type="text/css",r.styleSheet?r.styleSheet.cssText=e:r.appendChild(document.createTextNode(e)),n.appendChild(r),t}function sayHelloTo(e){return"hello "+e}__$styleInject("body{ background: #ccc; color: #666; }",void 0);var addArray=function(e){var t=e.reduce(function(e,t){return e+t},0);return t},result1=sayHelloTo("Jason"),result2=addArray([1,2,3,4]),printTarget=document.getElementsByClassName("debug__output")[0];printTarget.innerText="sayHelloTo('Jason') => "+result1+"\n\n",printTarget.innerText+="addArray([1, 2, 3, 4]) => "+result2;
 //# sourceMappingURL=bundle.js.map

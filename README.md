@@ -1,8 +1,10 @@
 # TODO List
 
-- css构建
-- 代码压缩
-- LiveReload
+- 文件MD5
+
+- css跨浏览器兼容性
+- CssSprite
+
 - 忽略第三方代码覆盖率测试配置
 - eslint 常用规则整理
 - CircleCI + github
@@ -20,9 +22,34 @@
 
 # Hello World
 
-前端开发环境搭建实例项目
+前端开发环境搭建实例项目，模板项目
 
-前端编码规范 + git提交规范 + 单元测试 + 覆盖率 + 持续集成
+**version 1.0.0**
+
+> git 项目初始化
+>
+> npm 项目初始化
+>
+> rollup 构建配置
+>
+> eslint 编码规范 
+>
+> karma 单元测试&代码覆盖率测试
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
 
 ## git init
 
@@ -58,7 +85,7 @@
 ```javascript
 export default {
   entry: 'src/index.js',
-  format: 'cjs', //cjs = commnjs，其他格式 amd | es6 | iife | umd
+  format: 'cjs', //cjs = commonjs，其他格式 amd | es6 | iife | umd
   dest: 'dist/bundle.js',
   sourceMap: true
 }
@@ -92,6 +119,21 @@ rollup插件列表：https://github.com/rollup
 
 rollup官方网址：http://rollupjs.org
 
+### 编码规范 rollup结合eslint 
+
+> npm i eslint -g
+>
+> npm install --save-dev rollup-plugin-eslint
+>
+> eslint --init
+
+按照指示一步步完成（git下的箭头选择有问题，可使用cmd），然后会自动安装依赖npm包 生成.eslintrc.js文件
+
+rollup中添加eslint插件配置
+```javascript
+eslint()
+```
+
 ### 编码规范
 
 > npm i eslint -g
@@ -101,11 +143,11 @@ rollup官方网址：http://rollupjs.org
 按照指示一步步完成（git下的箭头选择有问题，可使用cmd），然后会自动安装依赖npm包 生成.eslintrc.js文件
 
 > #### 自定义规则：
-> 0：关闭规则
+> "off" || 0：关闭规则
 >
-> 1：打开规则，并且作为一个警告（不影响exit code）
+> "warn" || 1：打开规则，并且作为一个警告，不影响构建
 >
-> 2：打开规则，并且作为一个错误（exit code将会是1）
+> "error" || 2：打开规则，并且作为一个错误，构建将会失败
 
 可选配置，让eslint忽略检测的文件 .eslintignore 配置规则与 .gitignore 一样
 #### Webstorm eslint 配置
@@ -130,6 +172,65 @@ eslint官方地址：http://eslint.org/
 eslint规则列表：http://eslint.org/docs/rules/
 
 eslint配置实例：https://github.com/feross/eslint-config-standard/blob/master/eslintrc.json
+
+### 多环境支持
+
+> npm i --save-dev rollup-plugin-replace
+
+在rollup.config.js中，添加插件配置 
+```javascript
+replace({
+      exclude: 'node_modules/**', // 忽略第三方代码
+      ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+    })
+```
+跨平台环境配置插件
+
+> npm i --save-dev cross-env
+
+可以通过这种方式设置环境变量 cross-env NODE_ENV=production
+
+### 代码压缩
+
+> npm i --save-dev rollup-plugin-uglify
+
+添加配置
+
+```javascript
+(process.env.NODE_ENV === 'production' && uglify())
+```
+
+### 提升开发体验
+
+> npm i --save-dev rollup-plugin-serve rollup-plugin-livereload rollup-watch
+
+配置插件
+```javascript
+// index.html should be in root of project
+// 默认端口10001
+serve(),      
+livereload({
+    watch: 'dist',
+    verbose: false, // Disable console output
+})
+```
+
+运行命令
+
+> rollup -c --watch
+
+之后就可以免刷新所见即所得了
+
+### 配置css构建
+
+> npm i --save-dev rollup-plugin-postcss
+
+配置插件
+```javascript
+postcss({
+    extensions: [ '.css' ]
+})
+```
 
 ### karma 单元测试
 
