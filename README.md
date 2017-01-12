@@ -5,15 +5,12 @@
 - css跨浏览器兼容性
 - CssSprite
 
-- 忽略第三方代码覆盖率测试配置
-- eslint 常用规则整理
 - CircleCI + github
 - git 提交规范流程说明
 - nightwatch 端到端自动化测试
 - 更好的配置方式
 
 有机结合
-1. rollup 结合 eslint
 1. rollup 结合 karma 单元测试
 1. rollup 结合 karma 代码覆盖率测试
 1. rollup 结合 nightwatch 端到端自动化测试
@@ -31,24 +28,15 @@
 > npm 项目初始化
 >
 > rollup 构建配置
->
+> 多环境支持
+> 不同环境的字符串replace
+> postcss 支持
+> serve + livereload + rollup-watch 提升开发体验
+> uglify + gzip 进一步缩减文件体积
+> 
 > eslint 编码规范 
 >
 > karma 单元测试&代码覆盖率测试
->
->
->
->
->
->
->
->
->
->
->
->
->
->
 >
 
 ## git init
@@ -115,7 +103,7 @@ babel 的配置不像 webpack 可以直接写在配置文件里，而是得新�
 
 
 
-rollup插件列表：https://github.com/rollup
+rollup插件列表：https://github.com/rollup/rollup/wiki/Plugins
 
 rollup官方网址：http://rollupjs.org
 
@@ -221,6 +209,12 @@ livereload({
 
 之后就可以免刷新所见即所得了
 
+### 友好的命令行输出（git 命令行下无效）
+
+> npm i --save-dev colors-cli
+
+官方网址：https://github.com/jaywcjlove/colors-cli
+
 ### 配置css构建
 
 > npm i --save-dev rollup-plugin-postcss
@@ -231,6 +225,41 @@ postcss({
     extensions: [ '.css' ]
 })
 ```
+
+### 更好的配置方式
+
+> npm i --save-dev rollup uglify-js
+
+## TODO 实现 以下配置已删除
+
+---
+
+### karma rollup集合karma单元测试
+
+> npm install --save-dev rollup-plugin-istanbul karma-rollup-plugin 
+>
+> npm install karma-rollup-preprocessor --save-dev
+
+karma.conf.js 配置
+```javascript
+config.set({
+    preprocessors: {
+     'test/**/*.js': ['rollup']
+    },
+    rollupPreprocessor: {
+      // rollup settings. See Rollup documentation 
+      plugins: [
+        buble() // ES2015 compiler by the same author as Rollup 
+      ],
+      // will help to prevent conflicts between different tests entries 
+      format: 'iife',
+      sourceMap: 'inline'
+    }
+  });
+```
+
+---
+
 
 ### karma 单元测试
 

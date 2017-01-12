@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel';
+import babel from 'rollup-plugin-babel'
 import eslint from 'rollup-plugin-eslint'
 import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
@@ -24,8 +24,7 @@ switch (process.env.NODE_ENV) {
         development(config)
         break;
     default:
-        development(config)
-        ;
+        development(config);
 }
 function production(config) {
     Object.assign(config, {
@@ -38,7 +37,7 @@ function production(config) {
             }),
             babel(),
             replace({
-                exclude: 'node_modules/!**', // 忽略第三方代码
+                exclude: 'node_modules/**', // 忽略第三方代码
                 ENV: '',
             }),
             uglify()
@@ -62,7 +61,7 @@ function development(config) {
             }),
             babel(),
             replace({
-                exclude: 'node_modules/!**', // 忽略第三方代码
+                exclude: 'node_modules/**', // 忽略第三方代码
                 ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
             }),
             serve(),      // index.html should be in root of project

@@ -1,17 +1,13 @@
 import { cube } from '../thirdparts/index1'
+import { isNum } from './modules/mod1'
 import './index.css'
 const addArray = arr => {
     const result = arr.reduce((a, b) => a + b, 0)
     return result;
 }
-function isNum (num) {
-    console.log(ENV) // replace 插件测试
-    if (typeof num === 'number') {
-        return true
-    } else {
-        return false
-    }
-}
+
+console.log(ENV) // replace 插件测试
+
 function sayHelloTo (v) {
     return 'hello ' + v
 }

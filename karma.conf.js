@@ -1,5 +1,9 @@
 // Karma configuration
 // Generated on Mon Jan 09 2017 15:46:16 GMT+0800 (中国标准时间)
+/*import istanbul from 'rollup-plugin-istanbul'
+import babel from 'rollup-plugin-babel'
+import postcss from 'rollup-plugin-postcss'
+import buble from 'rollup-plugin-buble'*/
 
 module.exports = function(config) {
   config.set({
@@ -28,8 +32,27 @@ module.exports = function(config) {
       preprocessors: {
           'test/**/*.js': ['webpack']
       },
-
-
+      /*preprocessors: {
+          'test/!**!/!*.js': ['rollup']
+      },
+      rollupPreprocessor: {
+          entry: 'src/index.js',
+          plugins: [
+              postcss({
+                  extensions: [ '.css' ]
+              }),
+              buble(), // ES2015 compiler by the same author as Rollup
+              istanbul({
+                  exclude: [
+                      'test/!*.js',
+                      'thirdarts/!*.js'
+                  ]
+              })
+          ],
+          // will help to prevent conflicts between different tests entries
+          format: 'cjs',
+          sourceMap: true
+      },*/
       // test results reporter to use
       // possible values: 'dots', 'progress'
       // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -70,6 +93,15 @@ module.exports = function(config) {
       // how many browser should be started simultaneous
       concurrency: Infinity,
       webpack: {
+          babel: {
+              plugins: [['istanbul', {
+                  exclude: [
+                      'test/',
+                      'thirdparts/',
+                      'thirdparts/*.js'
+                  ]
+              }]]
+          },
           module: {
               loaders: [{
                   test: /\.js$/,
@@ -77,7 +109,7 @@ module.exports = function(config) {
                   exclude: /node_modules/,
                   query: {
                       presets: ['es2015'],
-                      plugins: ['istanbul']
+                      // plugins: ['istanbul']
                   }
               }]
           }
