@@ -23,21 +23,17 @@
 
 **version 1.0.0**
 
-> git 项目初始化
->
-> npm 项目初始化
->
-> rollup 构建配置
-> 多环境支持
-> 不同环境的字符串replace
-> postcss 支持
-> serve + livereload + rollup-watch 提升开发体验
-> uglify + gzip 进一步缩减文件体积
-> 
-> eslint 编码规范 
->
-> karma 单元测试&代码覆盖率测试
->
+    git 项目初始化
+    npm 项目初始化
+    rollup 构建配置
+        多环境支持
+        不同环境的字符串replace
+        postcss 支持
+        
+        serve + livereload + rollup-watch 提升开发体验
+        生产环境 uglify + gzip 进一步缩减文件体积
+        eslint 编码规范，助力团队开发
+    karma 单元测试&代码覆盖率测试
 
 ## git init
 
@@ -225,6 +221,30 @@ postcss({
     extensions: [ '.css' ]
 })
 ```
+
+愉快的编写css，产出更好的css
+
+> npm i --save-dev postcss-simple-vars postcss-nested postcss-cssnext cssnano
+
+配置插件
+```javascript
+plugins: [ 
+    postcss({ 
+        plugins: [ 
+            simplevars(), 
+            nested(), 
+            cssnext({ warnForDuplicates: false, }), 
+            cssnano()
+            ], 
+            extensions: [ '.css' ] 
+    })
+]
+```
+
+输出单独的css文件
+
+> npm i --save-dev rollup-plugin-css-porter 
+
 
 ### 更好的配置方式
 

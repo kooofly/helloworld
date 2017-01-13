@@ -1,25 +1,6 @@
 document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');
 'use strict';
 
-function __$styleInject(css, returnValue) {
-  if (typeof document === 'undefined') {
-    return returnValue;
-  }
-  css = css || '';
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-  if (style.styleSheet){
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-  head.appendChild(style);
-  return returnValue;
-}
-
-__$styleInject("body{ background: #ccc; color: #666; }", undefined);
-
 var addArray = function addArray(arr) {
     var result = arr.reduce(function (a, b) {
         return a + b;
@@ -30,7 +11,7 @@ var addArray = function addArray(arr) {
 console.log("development"); // replace 插件测试
 
 function sayHelloTo(v) {
-    return 'hello ' + v;
+    return 'hello123 ' + v;
 }
 var result1 = sayHelloTo('Jason');
 var result2 = addArray([1, 2, 3, 4]);

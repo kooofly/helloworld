@@ -1,10 +1,5 @@
 const rollup = require('rollup')
-const babel = require('rollup-plugin-babel')
-const eslint = require('rollup-plugin-eslint')
-const replace = require('rollup-plugin-replace')
-const serve = require('rollup-plugin-serve')
-const livereload = require('rollup-plugin-livereload')
-const postcss = require('rollup-plugin-postcss')
+const config = require('./config')
 
 const fs = require('fs')
 const path = require('path')
@@ -20,24 +15,12 @@ build(process.env.NODE_ENV || 'development')
 function build(env) {
     console.time('rollup')
     console.log('ENV: ' + info(env))
-    const base = {
-        entry: 'src/index.js',
-        format: 'cjs', //cjs = commonjs，其他格式 amd | es6 | iife | umd
-        dest: 'dist/bundle.js',
-        sourceMap: true
-    }
-    const configExtendMap = {
-        production: production,
-        test: test,
-        development: development
-    }
-    const config = Object.assign(base, configExtendMap[env]())
     rollup
         .rollup(config)
         .then(function (bundle) {
             console.timeEnd('rollup')
             const code = bundle.generate(config).code
-            if (env === 'production') {
+            if (env !== 'production') {
                 var minified = uglify.minify(code, {
                     fromString: true,
                     output: {
@@ -59,55 +42,6 @@ function build(env) {
         })
 }
 
-function production () {
-    return {
-        dest: 'dist/index.min.js',
-        plugins: [
-            postcss({
-                extensions: [ '.css' ]
-            }),
-            /*eslint({
-                throwError: false // 为true warning error 都阻止构建
-            }),*/
-            babel(),
-            replace({
-                exclude: 'node_modules/**', // 忽略第三方代码
-                ENV: '',
-            }),
-            /*uglify()*/
-        ]
-    }
-}
-
-function test () {
-    return {
-        browsers: ['Chrome'],
-        reporters: ['progress']
-    }
-}
-
-function development () {
-    return {
-        plugins: [
-            postcss({
-                extensions: [ '.css' ]
-            }),
-            eslint({
-                throwError: false // 为true warning error 都阻止构建
-            }),
-            babel(),
-            replace({
-                exclude: 'node_modules/**', // 忽略第三方代码
-                ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-            }),
-            serve(),      // index.html should be in root of project
-            livereload({
-                watch: 'dist',
-                verbose: false, // Disable console output
-            })
-        ]
-    }
-}
 
 function write (dest, code, zip) {
     return new Promise((resolve, reject) => {
