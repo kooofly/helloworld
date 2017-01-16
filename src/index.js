@@ -9,7 +9,7 @@ const addArray = arr => {
 console.log(ENV) // replace 插件测试
 
 function sayHelloTo (v) {
-    return 'hello123 ' + v
+    return 'hello ' + v
 }
 const result1 = sayHelloTo('Jason');
 const result2 = addArray([1,2, 3, 4]);

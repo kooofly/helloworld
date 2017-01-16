@@ -242,8 +242,18 @@ plugins: [
 ```
 
 输出单独的css文件
+> 注：rollup-plugin-postcss 无法输出文件，rollup-plugin-css-porter 可以输出文件，但由于rollup-plugin-postcss思想是模块化输出css，所以两者不能结合使用。postcss本身提供from，to 参数来输出css文件。 （rollup-plugin-postcss version 0.2.0）
 
-> npm i --save-dev rollup-plugin-css-porter 
+所以，修改rollup-plugin-postcss插件代码，在 39 行加入如下代码
+
+```javascript
+if (options.to) {
+    fs.writeFile(opts.to, result.css);
+    if ( result.map ) fs.writeFile(opts.to + '.map', result.map);
+}
+```
+
+> 注：以上方法只是暂时的方式，是一个非常差的方式，正确的解决方案应该是向rollup-plugin-postcss提issue或者是自己编写一个插件
 
 
 ### 更好的配置方式
