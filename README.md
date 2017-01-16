@@ -2,9 +2,6 @@
 
 - 文件MD5
 
-- css跨浏览器兼容性
-- CssSprite
-
 - CircleCI + github
 - git 提交规范流程说明
 - nightwatch 端到端自动化测试
@@ -29,6 +26,7 @@
         多环境支持
         不同环境的字符串replace
         postcss 支持
+        css跨浏览器兼容性,自动优化css
         
         serve + livereload + rollup-watch 提升开发体验
         生产环境 uglify + gzip 进一步缩减文件体积
@@ -255,6 +253,22 @@ if (options.to) {
 
 > 注：以上方法只是暂时的方式，是一个非常差的方式，正确的解决方案应该是向rollup-plugin-postcss提issue或者是自己编写一个插件
 
+生产环境 配置插件
+```javascript
+plugins: [
+    postcss({
+        to: 'dist/style.css',
+        plugins: [
+            simpleVars(),
+            nested(),
+            cssnext({ warnForDuplicates: false }),
+            cssnano()
+        ],
+        extensions: [ '.css' ]
+    })
+]
+
+```
 
 ### 更好的配置方式
 

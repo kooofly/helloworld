@@ -67,7 +67,6 @@ function development () {
     return {
         plugins: [
             postcss({
-                to: 'dist/style.css',
                 plugins: [
                     simpleVars(),
                     nested(),
