@@ -444,6 +444,36 @@ module.exports = function(config) {
 
 然后把preprocessors里的coverage去掉
 
+---
+TODO 
+win7 
+jdk 1.8
+chrome 55.0.2883.87 m
+chromedriver 2.27 +
+所有驱动都无法打开页面链接 进行正确的e2e test
+### 配置nightwatch 端到端测试
+
+端到端测试主角
+
+> npm i --save-dev nightwatch
+
+更多的辅助函数
+> npm i --save-dev nightwatch-helpers
+> npm i --save-dev chromedriver
+>
+
+
+> npm i --save-dev cross-spawn
+> npm i --save-dev http-server
+> npm i --save-dev selenium-server
+
+端到端测试浏览器驱动管理
+
+> npm i --save-dev selenium-standalone
+
+新建配置文件nightwatch.conf.js
+
+---
 ### 配置CircleCI
 
 CircleCI官方地址：https://circleci.com

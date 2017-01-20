@@ -2,4 +2,5 @@
 .idea
 .DS_Store
 coverage
+e2ereports
 node_modules

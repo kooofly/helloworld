@@ -28,7 +28,6 @@ function config(env) {
 }
 
 function production () {
-    css()
     return {
         dest: 'dist/index.min.js',
         plugins: [

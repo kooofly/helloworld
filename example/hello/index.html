@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../dist/style.css"/>
+</head>
+<body>
+<a id="hello" href="javascript:;">123</a>
+<div id="hello-v"></div>
+<div class="circle"></div>
+<pre>
+    <code class="debug__output"></code>
+</pre>
+<script src="../../dist/index.min.js"></script>
+<script>
+    document.querySelector('#hello').onclick = function (e) {
+        document.querySelector('#hello-v').innerHTML = '<h1 id="hello">hello</h1>'
+    }
+</script>
+</body>
+</html>
